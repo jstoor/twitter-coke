@@ -33,11 +33,11 @@ How to retrieve data stored in database:
 After running the application and refreshing few times, a database will have been generated in the working directory of the server application i.e. "tweet.db".
 To query the raw results, open a new terminal and startup the Python interpreter. Then run the following example;
 
->>> from sqlalchemy import create_engine
->>> from sqlalchemy.orm import sessionmaker
->>> engine = create_engine("sqlite:///tweet.db")
->>> Session = sessionmaker(bind=engine)
->>> session = Session()
->>> data = session.execute('select * from tweet')
->>> for item in data:
-...   print item
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+engine = create_engine("sqlite:///tweet.db")
+Session = sessionmaker(bind=engine)
+session = Session()
+data = session.execute('select * from tweet')
+for item in data:
+   print item
