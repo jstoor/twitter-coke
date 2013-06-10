@@ -38,42 +38,30 @@ class DataStore(object):
     Session = sessionmaker(bind=engine)
     self.session = Session()
 
-  def close(self):
+  def __enter__(self):
+    return self
+
+  def __exit__(self, type, value, traceback):
     self.session.connection().close()
 
   def insert_tweet(self, tweet):
-    # Check if the tweet already exists.
-    #if self.session.query(Tweet).filter_by(id=tweet.id).count() == 0:
-      self.session.add(tweet)
-      self.session.commit()
-    #else:
-      # TODO : Update the record ???
-      #pass
+    self.session.add(tweet)
+    self.session.commit()
+
+  def insert_tweets(self, tweets):
+    for tweet in tweets:
+      self.insert_tweet(tweet)
 
   def get_all_tweets(self):
-    #stmt = select(['tweet.id', 'tweet.tweet_id', func.count('tweet.tweet_id'), from_obj=['tweet']])
-             #group_by(tweet_id)
+    raw_list = self.session.query(Tweet.id, Tweet.tweet_id,
+        func.count(Tweet.tweet_id), Tweet.message, Tweet.followers, Tweet.user_handle, Tweet.sentiment).group_by(Tweet.tweet_id).order_by('sentiment desc').all()
 
-    #return self.session.execute(stmt).fetchall()  
+    result = []
 
-    result = self.session.query(Tweet.id, Tweet.tweet_id,
-        func.count(Tweet.tweet_id), Tweet.message, Tweet.followers, Tweet.user_handle, Tweet.sentiment).group_by(Tweet.tweet_id).order_by('sentiment').all()
+    # raw_list is a tuple, so we need to convert to a dictioanry so that calling code can refer to attributes, rather than indexes.
+    # NOTE : Investigate better/cleaner way to resolve this.
+    result = [dict(zip(['id','tweet_id', 'count','message','followers','user_handle','sentiment'],item)) for item in raw_list]
 
-    
-
-    #result = self.session.query(Tweet).group_by('tweet_id').columns(Tweet.type,  func.count('*')).execute().fetchall() 
-
-
-    #tweet_items = self.session.query(Tweet).group_by('tweet_id').order_by('sentiment').all()
-    #for t in tweet_items:
-    #  print t
-    #return tweet_items
-    #print "---------------------------------------"
-
-    #data = self.session.execute('select * from tweet', mapper=Tweet)
-    #for i in data:
-    #  print i
-    #print "---------------------------------------"
     return result
 
 

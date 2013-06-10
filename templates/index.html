@@ -1,16 +1,60 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 <head>
-    <title>My Webpage</title>
+    <title>Twitter-Coke</title>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  
+    <script>
+    /*
+    Search for specific text and if found, highlight the relevant table row.
+    */
+    $(document).ready(function () {
+          $("td").filter(function() {
+              var txt = $(this).text().toLowerCase();
+
+              if(txt.indexOf('coke') != -1)
+                return true
+              else if(txt.indexOf('coca-cola') != -1) 
+                return true
+              else if(txt.indexOf('diet cola') != -1) 
+                return true
+              else
+                return false
+          }).css('color','red');
+    });
+    </script>
+
 </head>
 <body>
-    <ul id="navigation">
-    {% for item in navigation %}
-        <li>{{ item.message }}</li>
-    {% endfor %}
-    </ul>
 
-    <h1>My Webpage</h1>
-    {{ a_variable }}
+    {{ error_message }}
+
+    <table id="my_table" border="1">
+      <tr>
+        <th>user_handle</th>
+        <th>message</th>
+        <th>sentiment</th>
+        <th>count</th>
+      </tr>  
+    {% for item in tweet_list %}
+      <tr>
+        <td>{{ item.user_handle}}</td>
+        <td id="fred">{{ item.message }}</td>
+        <td>{{ item.sentiment }}</td>
+        <td>{{ item.count}}</td>
+      </tr>
+    {% endfor %}
+    </table>
+
+    <br/>
+
+    <form action='/' method=GET>
+    
+      <dd><input type='submit' value='Fetch more messages'>
+   
+    </form>
+
 </body>
 </html>
+
