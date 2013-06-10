@@ -3,7 +3,7 @@ Twitter-Coke
 
 Simple application that calls a third-party api to retrieve twitter like data and then displays the results in a webpage.
 On each request, all data is saved to a database, but duplicates are not shown in the web page.
-Demonstrates UI/JQuery/Jinja2/Flask/API all working together.
+Demonstrates UI/JQuery/Jinja2/Flask/API/SQLAlchemy/SQLite working together.
 
 
 How to run the app:
