@@ -59,19 +59,21 @@ class DataStore(object):
     result = self.session.query(Tweet.id, Tweet.tweet_id,
         func.count(Tweet.tweet_id), Tweet.message, Tweet.followers, Tweet.user_handle, Tweet.sentiment).group_by(Tweet.tweet_id).order_by('sentiment').all()
 
+    
+
     #result = self.session.query(Tweet).group_by('tweet_id').columns(Tweet.type,  func.count('*')).execute().fetchall() 
 
 
-    tweet_items = self.session.query(Tweet).group_by('tweet_id').order_by('sentiment').all()
-    for t in tweet_items:
-      print t
+    #tweet_items = self.session.query(Tweet).group_by('tweet_id').order_by('sentiment').all()
+    #for t in tweet_items:
+    #  print t
     #return tweet_items
-    print "---------------------------------------"
+    #print "---------------------------------------"
 
-    data = self.session.execute('select * from tweet', mapper=Tweet)
-    for i in data:
-      print i
-    print "---------------------------------------"
+    #data = self.session.execute('select * from tweet', mapper=Tweet)
+    #for i in data:
+    #  print i
+    #print "---------------------------------------"
     return result
 
 

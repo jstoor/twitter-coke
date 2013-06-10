@@ -1,0 +1,28 @@
+<style type="text/css">
+.metanav
+{
+    background-color: yellow;
+}
+</style>
+<div class="page">
+  <h1>Flaskr</h1>
+  <div class="metanav">
+
+  <form action="/template_test" method=GET>
+    
+      <dd><input type=submit value=Login>
+   
+  </form>
+
+
+  {{ a_random_string }}<br>
+
+  <ul>
+  {% for item in a_random_list %}
+        <li style="{% if item.count == 5%}color:red;{% endif %}">{{ item.name }} :: {{ item.count }}</li>
+    {% endfor %}
+    </ul>
+
+
+  </div>
+</div>
