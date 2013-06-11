@@ -5,6 +5,8 @@ Simple application that calls a third-party api to retrieve twitter like data an
 On each request, all data is saved to a database, but duplicates are not shown in the web page.
 Demonstrates UI/JQuery/Jinja2/Flask/API/SQLAlchemy/SQLite working together.
 
+This project is only meant for educational purposes.
+
 
 How to run the app:
 ===================
