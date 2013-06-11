@@ -20,13 +20,15 @@ python server.py
 This'll start the server application - ctrl+c to exit.
 
 Dependancies:
+
     Python 2.7
     Jinja2
     Flask
     SQLAlchemy
 
 Once the server is running, in a new browser window open the url : 
-  http://127.0.0.1:7000/
+
+    http://127.0.0.1:7000/
 
 If no content displayed, click on the "Fetch more messages" button.
 Click to keep refreshing the page.
